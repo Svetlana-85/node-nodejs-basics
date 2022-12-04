@@ -10,10 +10,8 @@ const read = async () => {
     const fileName = 'fileToRead.txt';
     const filePath = join(__dirname, folderName, fileName);
 
-    const stream = new fs.ReadStream(filePath, 'utf8');
-    let data = '';
-    stream.on('data', chunk => data += chunk);
-    stream.on('close', () => process.stdout.write(data));
+    const stream = fs.createReadStream(filePath, 'utf8');
+    stream.pipe(process.stdout);
 };
 
 await read();
